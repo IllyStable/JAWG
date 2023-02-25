@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Slider picking-mode="Ignore" label="Throttle Increment" value="0.1" high-value="1" binding-path="throttleIncrement" direction="Horizontal" show-input-field="true" tooltip="How fast the throttle increases or decreases" name="ThrottleIncrement" />
+    <ui:Slider picking-mode="Ignore" label="Engine Power" value="200" high-value="2500" binding-path="maxThrust" name="EnginePower" tooltip="How powerful the engine is at 100% throttle (200 = 800mph max speed in a high-altitude dive)" show-input-field="true" />
+    <ui:Slider picking-mode="Ignore" label="Agility" value="10" high-value="25" name="Agility" tooltip="How agile the plane is" show-input-field="true" binding-path="responsiveness" />
+    <ui:Slider picking-mode="Ignore" label="Lift" value="135" high-value="200" name="Lift" binding-path="lift" tooltip="Force applied to the bottom of the plane to create lift." show-input-field="true" />
+    <ui:Slider picking-mode="Ignore" label="Air Density Divisor" value="42" high-value="0.001" tooltip="How much air density affects the plane&apos;s speed" binding-path="airDensity" name="AirDensity" show-input-field="true" />
+    <uie:EnumField label="Over Throttle" value="wep" binding-path="throttleReaction" name="overthrottle" tooltip="What happens when the throttle is pressed over 100%." />
+</ui:UXML>
