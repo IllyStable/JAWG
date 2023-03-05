@@ -2,6 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CriticalComponent
+{
+    public enum ComponentType
+    {
+        engine,
+        fueltank,
+        pilot,
+    }
+    public ComponentType type;
+    public Vector3 position;
+    public Vector3 size;
+}
+
+
 public class PlaneController2 : MonoBehaviour
 {
     private Rigidbody Rigidbody;
@@ -59,6 +74,8 @@ public class PlaneController2 : MonoBehaviour
     private TMPro.TextMeshProUGUI hud;
     [SerializeField]
     private Animation engineOnAnimation;
+    [SerializeField]
+    private CriticalComponent[] criticalComponents;
 
     private void Awake()
     {
@@ -70,7 +87,6 @@ public class PlaneController2 : MonoBehaviour
     private Vector3 LocalVelocity;
     private Vector3 LocalAngularVelocity;
     private Vector3 LocalGForce;
-    private float gForceScaling;
     private float throttle;
     private float roll;
     private float pitch;
@@ -262,7 +278,7 @@ public class PlaneController2 : MonoBehaviour
         var steeringPower = steeringCurve.Evaluate(speed);
         var controlInput = new Vector3(pitch, yaw, roll);
 
-        gForceScaling = CalculateGLimiter(controlInput, turnSpeed * Mathf.Deg2Rad * steeringPower);
+        var gForceScaling = CalculateGLimiter(controlInput, turnSpeed * Mathf.Deg2Rad * steeringPower);
 
         var targetAV = Vector3.Scale(controlInput, turnSpeed * steeringPower * gForceScaling);
         var av = LocalAngularVelocity * Mathf.Rad2Deg;
@@ -282,7 +298,7 @@ public class PlaneController2 : MonoBehaviour
         hud.text = "Throttle: " + throttle.ToString("F0") + "%\n";
         hud.text += "IAS: " + (Rigidbody.velocity.magnitude).ToString("F0") + "mph\n";
         hud.text += "Altitude: " + (transform.position.y).ToString("F0") + "m\n";
-        hud.text += "G: " + (1 / gForceScaling).ToString("F0") + "G\n";
+        hud.text += "G: " + ((CalculateGForce(LocalAngularVelocity, LocalVelocity).magnitude / 9.80665) + 1).ToString("F0") + "G\n";
     }
 
     //similar to Vector3.Scale, but has separate factor negative values on each axis

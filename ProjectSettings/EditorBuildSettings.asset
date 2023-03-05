@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: d562d56e2499a024aad3e520313be955
+  - enabled: 1
+    path: Assets/Scenes/G50.unity
+    guid: 3bf3b3e5d0f569544901e2df9454b99d
+  - enabled: 1
+    path: Assets/Scenes/Spitfire.unity
+    guid: de69a3916cedef844b0a353c67352e84
   m_configObjects: {}
